@@ -84,6 +84,23 @@ class MainActivity : AppCompatActivity() {
         buttonMinus.setOnClickListener(opListener)
         buttonAdd.setOnClickListener(opListener)
 
+        val buttonNeg: Button = findViewById(R.id.buttonNeg)
+        buttonNeg.setOnClickListener { view ->
+            val value = newNumber.text.toString()
+            if (value.isEmpty()) {
+                newNumber.setText("-")
+            } else {
+                try {
+                    var doubleValue = value.toDouble()
+                    doubleValue *= -1
+                    newNumber.setText(doubleValue.toString())
+                } catch (e: NumberFormatException) {
+                    // newNumber was "-" or ".", so clear it
+                    newNumber.setText("")
+                }
+            }
+        }
+
     }
 
     private fun performOperation(value: Double, operation: String) {
